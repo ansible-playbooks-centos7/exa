@@ -1,0 +1,27 @@
+- name: Install Rust
+  shell: curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+- name: Install required packages
+  yum:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - libgit2
+    - cmake
+
+- name: Install exa with cargo
+  shell: /bin/bash -lc "cargo install --no-default-features exa"
+
+- name: Copy exa executable file to '/usr/local/bin'
+  copy:
+    src: /root/.cargo/bin/exa
+    dest: /usr/local/bin/exa
+    mode: 0755
+    owner: root
+    group: root
+    remote_src: yes
+
+- name: Delete exa executable file
+  file:
+    path: /root/.cargo/bin/exa
+    state: absent
