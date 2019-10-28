@@ -1,6 +1,6 @@
 This playbook installs exa on CentOS7.
 
-## Install exa 
+## Install exa
 
 Change to root and execute commands below.
 
