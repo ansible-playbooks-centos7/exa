@@ -1,13 +1,25 @@
+---
+- name: Check if exa is intalled
+  shell: exa
+  register: EXA_INSTALLED
+  changed_when: false
+  ignore_errors: true
+  environment:
+    PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
+
 - name: Install Rust
   shell: curl https://sh.rustup.rs -sSf | sh -s -- -y
+  when: EXA_INSTALLED is failed
 
 - name: Install required packages
   yum:
     name: '@Development Tools'
     state: present
+  when: EXA_INSTALLED is failed
 
 - name: Install exa with cargo
   shell: /bin/bash -lc "cargo install --no-default-features exa"
+  when: EXA_INSTALLED is failed
 
 - name: Copy exa executable file to '/usr/local/bin'
   copy:
@@ -17,8 +29,10 @@
     owner: root
     group: root
     remote_src: yes
+  when: EXA_INSTALLED is failed
 
 - name: Delete exa executable file
   file:
     path: /root/.cargo/bin/exa
     state: absent
+  when: EXA_INSTALLED is failed

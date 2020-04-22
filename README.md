@@ -1,12 +1,39 @@
-This playbook installs exa on CentOS7.
+[![](https://github.com/ansible-roles-matsumura/exa/workflows/Build/badge.svg)](https://github.com/ansible-roles-matsumura/exa/actions?query=workflow%3ABuild)
+[![](https://github.com/ansible-roles-matsumura/exa/workflows/Lint/badge.svg)](https://github.com/ansible-roles-matsumura/exa/actions?query=workflow%3ALint)
+[![](https://github.com/ansible-roles-matsumura/exa/workflows/Trailing%20whitespace/badge.svg)](https://github.com/ansible-roles-matsumura/exa/actions?query=workflow%3A%22Trailing+whitespace%22)
 
-## Install exa
+Role Description
+=========
 
-Change to root and execute commands below.
+Installs [exa](https://github.com/ogham/exa) for CentOS7.
 
+Requirements
+------------
+
+None
+
+Role Variables
+--------------
+
+None
+
+Dependencies
+------------
+
+None
+
+Example Playbook
+----------------
+
+```YAML
+---
+- hosts: all
+  become: true
+  roles:
+    - exa
 ```
-ansible-playbook -i localhost, -c local install.yml
-```
 
-## exa
-[ogham/exa: A modern version of ‘ls’. | GitHub](https://github.com/ogham/exa)
+License
+-------
+
+BSD
