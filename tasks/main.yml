@@ -1,5 +1,5 @@
 ---
-- name: Check if exa is intalled
+- name: Check whether exa is intalled
   shell: exa
   register: EXA_INSTALLED
   changed_when: false
@@ -12,7 +12,7 @@
   when: EXA_INSTALLED is failed
 
 - name: Install required packages
-  yum:
+  package:
     name: '@Development Tools'
     state: present
   when: EXA_INSTALLED is failed
