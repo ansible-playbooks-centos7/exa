@@ -1,0 +1,7 @@
+---
+roles:
+  - name: exa
+    src: https://github.com/ansible-roles-matsumura/exa.git
+
+collections:
+  - name: community.general
