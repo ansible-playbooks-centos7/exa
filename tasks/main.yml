@@ -1,6 +1,6 @@
 ---
 - name: Check whether exa is intalled
-  shell: exa
+  ansible.builtin.shell: exa
   register: EXA_INSTALLED
   changed_when: false
   ignore_errors: true
@@ -8,21 +8,23 @@
     PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
 
 - name: Install Rust
-  shell: curl https://sh.rustup.rs -sSf | sh -s -- -y
+  ansible.builtin.shell: |
+    curl https://sh.rustup.rs -sSf | sh -s -- -y
   when: EXA_INSTALLED is failed
 
 - name: Install required packages
-  package:
+  ansible.builtin.package:
     name: '@Development Tools'
     state: present
   when: EXA_INSTALLED is failed
 
 - name: Install exa with cargo
-  shell: /bin/bash -lc "cargo install --no-default-features exa"
+  ansible.builtin.shell: |
+    /bin/bash -lc "cargo install --no-default-features exa"
   when: EXA_INSTALLED is failed
 
 - name: Copy exa executable file to '/usr/local/bin'
-  copy:
+  ansible.builtin.copy:
     src: /root/.cargo/bin/exa
     dest: /usr/local/bin/exa
     mode: 0755
@@ -32,7 +34,7 @@
   when: EXA_INSTALLED is failed
 
 - name: Delete exa executable file
-  file:
+  ansible.builtin.file:
     path: /root/.cargo/bin/exa
     state: absent
   when: EXA_INSTALLED is failed
