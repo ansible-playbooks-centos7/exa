@@ -1,0 +1,6 @@
+---
+parseable: true
+skip_list:
+  - command-instead-of-module
+  - command-instead-of-shell
+  - risky-shell-pipe
