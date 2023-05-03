@@ -10,6 +10,9 @@
 - name: Install Rust
   ansible.builtin.shell: |
     curl https://sh.rustup.rs -sSf | sh -s -- -y
+  register: rust_installed
+  changed_when: rust_installed.stdout | length != 0
+  failed_when: rust_installed.stdout | length == 0
   when: exa_installed is failed
 
 - name: Install required packages
@@ -21,6 +24,9 @@
 - name: Install exa with cargo
   ansible.builtin.shell: |
     /bin/bash -lc "cargo install --no-default-features exa"
+  register: cargo_installed
+  changed_when: cargo_installed.rc == 0
+  failed_when: cargo_installed.rc != 0
   when: exa_installed is failed
 
 - name: Copy exa executable file to '/usr/local/bin'
