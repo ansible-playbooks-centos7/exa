@@ -3,7 +3,7 @@
 Role Description
 =========
 
-Installs [exa](https://github.com/ogham/exa) for CentOS7/Stream8.
+Installs [exa](https://github.com/ogham/exa) for Linux.
 
 Requirements
 ------------
